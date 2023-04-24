@@ -1,2 +1,2 @@
 # fluffy-spork
-trail for simple shell
+trial for simple shell

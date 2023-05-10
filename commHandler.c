@@ -17,8 +17,6 @@ int commandHandler(char *args[])
 	
 	char *args_aux[256];
 	
-	/*We look for the special characters and separate the command itself*/
-	/*in a new array for the arguments*/
 	while ( args[b] != NULL)
 	{
 		if ( (strcmp(args[b],">") == 0) || (strcmp(args[b],"<") == 0) || (strcmp(args[b],"&") == 0))
@@ -44,8 +42,7 @@ int commandHandler(char *args[])
 				fileDescriptor = open(args[b+1], O_CREAT | O_TRUNC | O_WRONLY, 0600); 
 				/*We replace stdo with the appropriate file*/
 				standardOut = dup(STDOUT_FILENO); 
-				/*first we make a copy of stdout because we'll want it back*/
-
+				
 				dup2(fileDescriptor, STDOUT_FILENO); 
 				close(fileDescriptor);
 				printf("%s\n", getcwd(currentDirectory, 1024));
@@ -75,7 +72,7 @@ int commandHandler(char *args[])
 			if ( (strcmp(args[b],">") == 0) && (args[b+1] != NULL) )
 			{
 				fileDescriptor = open(args[b+1], O_CREAT | O_TRUNC | O_WRONLY, 0600); 
-				/*We replace the standard output with the appropriate file*/
+
 				standardOut = dup(STDOUT_FILENO);
 				dup2(fileDescriptor, STDOUT_FILENO); 
 				close(fileDescriptor);
@@ -152,7 +149,7 @@ int commandHandler(char *args[])
 		}
 
 		args_aux[a] = NULL;
-		launchProg(args_aux,background);
+		prog_launch(args_aux,background);
 	}
 	return 1;
 }

@@ -1,4 +1,4 @@
-#include "shel.h"
+#include "shell.h"
 
 /**
  *commands - Method used to handle the commands in stdin

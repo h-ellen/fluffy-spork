@@ -13,7 +13,7 @@ int main(int argc, char *argv[], char ** envp)
 	no_reprint_prmpt = 0;
   pid = -10;
 	
-	init();
+	initalize();
 
 	environ = envp;
 

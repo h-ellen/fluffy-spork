@@ -6,11 +6,10 @@
  */
 void shellPrompt()
 {
-int main() {
-    char command[100];
-    while (1)
-    {
-        printf("user$ ");
+	while (1)
+	{
+		printf("user$ ");
+	}
 }
 
 /**

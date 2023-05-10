@@ -4,7 +4,7 @@
 * main - function method of our shell
 * Return: alwayz zero
 */
-int main(int argc, char *argv[], char ** envp)
+int main(char ** envp)
 {
 	char line[LINEMAX];
 	char *tokens[LIM];

@@ -24,8 +24,8 @@ static int __attribute__ ((unused)) INTERACTIVE_SH;
 static struct termios MOD_SH;
 static char* current_dir;
 extern char** environ;
-struct sigact t_child;
-struct sigact t_int;
+struct sigaction act_child;
+struct sigaction act_int;
 int no_prompt;
 pid_t pid;
 

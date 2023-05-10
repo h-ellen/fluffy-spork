@@ -1,24 +1,22 @@
 #include "shel.h"
 
 /**
- *commandHandler - Method used to handle the commands in stdin
+ *commands - Method used to handle the commands in stdin
  *Return: always 0
  */ 
-int commandHandler(char *args[])
+int commands(char *args[])
 {
 	int a = 0;
 	int b = 0;
 	
-	int fileDescriptor;
-	int standardOut;
+	int fileDesc;
+	int stdOut;
 	
 	int aux;
-	int background = 0;
+	int bkground = 0;
 	
 	char *args_aux[256];
 	
-	/*We look for the special characters and separate the command itself*/
-	/*in a new array for the arguments*/
 	while ( args[b] != NULL)
 	{
 		if ( (strcmp(args[b],">") == 0) || (strcmp(args[b],"<") == 0) || (strcmp(args[b],"&") == 0))
@@ -41,20 +39,19 @@ int commandHandler(char *args[])
 			/*If we want file output*/
 			if ( (strcmp(args[b],">") == 0) && (args[b+1] != NULL) )
 			{
-				fileDescriptor = open(args[b+1], O_CREAT | O_TRUNC | O_WRONLY, 0600); 
+				fileDesc = open(args[b+1], O_CREAT | O_TRUNC | O_WRONLY, 0600); 
 				/*We replace stdo with the appropriate file*/
-				standardOut = dup(STDOUT_FILENO); 
-				/*first we make a copy of stdout because we'll want it back*/
-
-				dup2(fileDescriptor, STDOUT_FILENO); 
-				close(fileDescriptor);
-				printf("%s\n", getcwd(currentDirectory, 1024));
-				dup2(standardOut, STDOUT_FILENO);
+				stdOut = dup(STDOUT_FILENO); 
+				
+				dup2(fileDesc, STDOUT_FILENO); 
+				close(fileDes);
+				printf("%s\n", getcwd(current_dir, 1024));
+				dup2(stdOut, STDOUT_FILENO);
 			}
 		}
 		else
 		{
-			printf("%s\n", getcwd(currentDirectory, 1024));
+			printf("%s\n", getcwd(current_dir, 1024));
 		}
 	}
   
@@ -64,7 +61,7 @@ int commandHandler(char *args[])
   
 	/*'cd' command to change directory*/
 	else if (strcmp(args[0],"cd") == 0)
-    changeDirectory(args);
+    chgDir(args);
   
 	/*'environ' command to list the environment variables*/
 	else if (strcmp(args[0],"environ") == 0)
@@ -74,39 +71,36 @@ int commandHandler(char *args[])
 			/*If we want file output*/
 			if ( (strcmp(args[b],">") == 0) && (args[b+1] != NULL) )
 			{
-				fileDescriptor = open(args[b+1], O_CREAT | O_TRUNC | O_WRONLY, 0600); 
-				/*We replace the standard output with the appropriate file*/
-				standardOut = dup(STDOUT_FILENO);
-				dup2(fileDescriptor, STDOUT_FILENO); 
-				close(fileDescriptor);
-				manageEnviron(args,0);
-				dup2(standardOut, STDOUT_FILENO);
+				fileDesc = open(args[b+1], O_CREAT | O_TRUNC | O_WRONLY, 0600); 
+
+				stdOut = dup(STDOUT_FILENO);
+				dup2(fileDesc, STDOUT_FILENO); 
+				close(fileDesc);
+				man_env(args,0);
+				dup2(stdOut, STDOUT_FILENO);
 			}
 		}
 		else
 		{
-			manageEnviron(args,0);
+			man_env(args,0);
 		}
 	}
-  
-	/*'setenv' command to set environment variables*/
 	else if (strcmp(args[0],"setenv") == 0)
-    manageEnviron(args,1);
-  
-	/*'unsetenv' command to undefine environment variables*/
+    man_env(args,1);
+
 	else if (strcmp(args[0],"unsetenv") == 0)
-    manageEnviron(args,2);
+    man_env(args,2);
   else
   {
-    while (args[a] != NULL && background == 0)
+    while (args[a] != NULL && bkground == 0)
     {
       if (strcmp(args[a],"&") == 0)
       {
-        background = 1;
+        bkground = 1;
       }
 			else if (strcmp(args[a],"|") == 0)
 			{
-				pipeHandler(args);
+				pipe_handler(args);
 				return 1;
 			}
 			/**
@@ -130,7 +124,7 @@ int commandHandler(char *args[])
 						return -2;
 					}
 				}
-				fileIO(args_aux,args[a+1],args[a+3],1);
+				files(args_aux,args[a+1],args[a+3],1);
 				return 1;
 			}
 			/**
@@ -145,14 +139,14 @@ int commandHandler(char *args[])
 					printf("Not enough input arguments\n");
 					return -1;
 				}
-				fileIO(args_aux,NULL,args[a+1],0);
+				files(args_aux,NULL,args[a+1],0);
 				return 1;
 			}
 			a++;
 		}
 
 		args_aux[a] = NULL;
-		launchProg(args_aux,background);
+		prog_launch(args_aux,bkground);
 	}
 	return 1;
 }

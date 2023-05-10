@@ -10,27 +10,20 @@ int main(int argc, char *argv[], char ** envp)
 	char *tokens[LIM];
 	int tokenNum;
 
-	no_reprint_prmpt = 0;
-	/*to prevent the printing of the shell after certain methods*/
-	/*we initialize pid to an pid that is not possible*/
+	no_prompt = 0;
   pid = -10;
 	
-	/*We call the method of initialization*/
-	init();
-    
-    /*We set our extern char** environ to the environment, so that*/
-    /*we can treat it later in other methods*/
+	initalize();
+
 	environ = envp;
-	
-	/*We set shell=<pathname>/simple-c-shell as an environment variable for*/
-	/*the child*/
-	setenv("shell",getcwd(currentDirectory, 1024),1);
-  
+
+	setenv("shell",getcwd(current_dir, 1024),1);
+
 	while(TRUE)
 	{
 		/*We print the shell prompt if necessary*/
-		if (no_reprint_prmpt == 0) shellPrompt();
-		no_reprint_prmpt = 0;
+		if (no_prompt == 0) shellPrompt();
+		no_prompt = 0;
 		
 		/*We empty the line buffer*/
 		memset ( line, '\0', LINEMAX );
@@ -46,7 +39,7 @@ int main(int argc, char *argv[], char ** envp)
 		tokenNum = 1;
 		while((tokens[tokenNum] = strtok(NULL, " \n\t")) != NULL) tokenNum++;
 		
-		commandHandler(tokens);
+		commands(tokens);
 		
 	}          
 

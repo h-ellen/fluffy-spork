@@ -18,20 +18,20 @@
 #define FALSE !TRUE
 
 /*Shell pid, pgid, terminal modes*/
-static pid_t GBSH_PID;
-static pid_t GBSH_PGID;
-static int GBSH_IS_INTERACTIVE;
-static struct termios GBSH_TMODES;
-static char* currentDirectory;
-extern char** environ;
-struct sigaction act_child;
-struct sigaction act_int;
-int no_reprint_prmpt;
+static pid_t PID_SH;
+static pid_t PGID_SH;
+static int INTERACTIVE_SH;
+static struct termios MOD_SH;
+static char* current_dir;
+extern char** e_nvironment;
+struct sigact t_child;
+struct sigact t_int;
+int no_prompt;
 pid_t pid;
 
 /*signal handlers*/
-void signalHandler_child(int p);
-void signalHandler_int(int p);
+void _child_handler(int p);
+void _int_handler(int p);
 
-int changeDirectory(char * args[]);
-#endif /*SHELL_H*/
+int chgDir(char * args[]);
+#endif /*SHEL_H*/

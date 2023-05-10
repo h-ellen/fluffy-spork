@@ -33,5 +33,5 @@ pid_t pid;
 void signalHandler_child(int p);
 void signalHandler_int(int p);
 
-int changeDirectory(char * args[]);
-#endif /*SHELL_H*/
+int chgDir(char * args[]);
+#endif /*SHEL_H*/

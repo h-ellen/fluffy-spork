@@ -1,19 +1,19 @@
 #include "shel.h"
 
 /**
- *commandHandler - Method used to handle the commands in stdin
+ *commands - Method used to handle the commands in stdin
  *Return: always 0
  */ 
-int commandHandler(char *args[])
+int commands(char *args[])
 {
 	int a = 0;
 	int b = 0;
 	
-	int fileDescriptor;
-	int standardOut;
+	int fileDesc;
+	int stdOut;
 	
 	int aux;
-	int background = 0;
+	int bkground = 0;
 	
 	char *args_aux[256];
 	
@@ -39,19 +39,19 @@ int commandHandler(char *args[])
 			/*If we want file output*/
 			if ( (strcmp(args[b],">") == 0) && (args[b+1] != NULL) )
 			{
-				fileDescriptor = open(args[b+1], O_CREAT | O_TRUNC | O_WRONLY, 0600); 
+				fileDesc = open(args[b+1], O_CREAT | O_TRUNC | O_WRONLY, 0600); 
 				/*We replace stdo with the appropriate file*/
-				standardOut = dup(STDOUT_FILENO); 
+				stdOut = dup(STDOUT_FILENO); 
 				
-				dup2(fileDescriptor, STDOUT_FILENO); 
-				close(fileDescriptor);
-				printf("%s\n", getcwd(currentDirectory, 1024));
-				dup2(standardOut, STDOUT_FILENO);
+				dup2(fileDesc, STDOUT_FILENO); 
+				close(fileDes);
+				printf("%s\n", getcwd(current_dir, 1024));
+				dup2(stdOut, STDOUT_FILENO);
 			}
 		}
 		else
 		{
-			printf("%s\n", getcwd(currentDirectory, 1024));
+			printf("%s\n", getcwd(current_dir, 1024));
 		}
 	}
   
@@ -71,13 +71,13 @@ int commandHandler(char *args[])
 			/*If we want file output*/
 			if ( (strcmp(args[b],">") == 0) && (args[b+1] != NULL) )
 			{
-				fileDescriptor = open(args[b+1], O_CREAT | O_TRUNC | O_WRONLY, 0600); 
+				fileDesc = open(args[b+1], O_CREAT | O_TRUNC | O_WRONLY, 0600); 
 
-				standardOut = dup(STDOUT_FILENO);
-				dup2(fileDescriptor, STDOUT_FILENO); 
-				close(fileDescriptor);
+				stdOut = dup(STDOUT_FILENO);
+				dup2(fileDesc, STDOUT_FILENO); 
+				close(fileDesc);
 				man_env(args,0);
-				dup2(standardOut, STDOUT_FILENO);
+				dup2(stdOut, STDOUT_FILENO);
 			}
 		}
 		else
@@ -92,15 +92,15 @@ int commandHandler(char *args[])
     man_env(args,2);
   else
   {
-    while (args[a] != NULL && background == 0)
+    while (args[a] != NULL && bkground == 0)
     {
       if (strcmp(args[a],"&") == 0)
       {
-        background = 1;
+        bkground = 1;
       }
 			else if (strcmp(args[a],"|") == 0)
 			{
-				pipeHandler(args);
+				pipe_handler(args);
 				return 1;
 			}
 			/**
@@ -146,7 +146,7 @@ int commandHandler(char *args[])
 		}
 
 		args_aux[a] = NULL;
-		prog_launch(args_aux,background);
+		prog_launch(args_aux,bkground);
 	}
 	return 1;
 }

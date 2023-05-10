@@ -11,21 +11,14 @@ int main(int argc, char *argv[], char ** envp)
 	int tokenNum;
 
 	no_reprint_prmpt = 0;
-	/*to prevent the printing of the shell after certain methods*/
-	/*we initialize pid to an pid that is not possible*/
   pid = -10;
 	
-	/*We call the method of initialization*/
 	init();
-    
-    /*We set our extern char** environ to the environment, so that*/
-    /*we can treat it later in other methods*/
+
 	environ = envp;
-	
-	/*We set shell=<pathname>/simple-c-shell as an environment variable for*/
-	/*the child*/
+
 	setenv("shell",getcwd(currentDirectory, 1024),1);
-  
+
 	while(TRUE)
 	{
 		/*We print the shell prompt if necessary*/

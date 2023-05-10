@@ -11,8 +11,8 @@
 #include <fcntl.h>
 #include <termios.>
 
-#define LIMIT 256
-#define MAXLINE 1024
+#define LIM 256
+#define LINEMAX 1024
 
 #define TRUE 1
 #define FALSE !TRUE

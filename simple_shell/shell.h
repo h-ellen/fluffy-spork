@@ -21,7 +21,7 @@
 static pid_t __attribute__ ((unused)) PID_SH;
 static pid_t __attribute__ ((unused)) PGID_SH;
 static int __attribute__ ((unused)) INTERACTIVE_SH;
-static struct __attribute__ ((unused)) termios MOD_SH;
+static struct termios __attribute__ ((unused)) MOD_SH;
 static char* __attribute__ ((unused)) current_dir;
 extern char** __attribute__ ((unused)) environ;
 struct sigaction act_child;

@@ -30,8 +30,8 @@ int no_prompt;
 pid_t pid;
 
 /*signal handlers*/
-void _child_handler(int p);
-void _int_handler(int p);
+void _child_handler();
+void _int_handler();
 
 int chgDir(char * args[]);
 int commands(char *args[]);

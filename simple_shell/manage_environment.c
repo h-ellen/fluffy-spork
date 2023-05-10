@@ -1,4 +1,4 @@
-#include "shel.h"
+#include "shell.h"
 
 /**
  * shellPrompt - Displays the prompt for the shell

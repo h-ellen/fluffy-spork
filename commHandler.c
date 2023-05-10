@@ -64,7 +64,7 @@ int commandHandler(char *args[])
   
 	/*'cd' command to change directory*/
 	else if (strcmp(args[0],"cd") == 0)
-    changeDirectory(args);
+    chgDir(args);
   
 	/*'environ' command to list the environment variables*/
 	else if (strcmp(args[0],"environ") == 0)

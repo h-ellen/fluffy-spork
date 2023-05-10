@@ -5,7 +5,7 @@
 * or in the foreground
 * Return: always zero
 */ 
-void prog_launch(char **args, int background)
+void prog_launch(char **args, int bckgrnd)
 {	 
 	 int error = -1;
 	 
@@ -18,7 +18,7 @@ void prog_launch(char **args, int background)
 	if(pid==0)
 	{
 		signal(SIGINT, SIG_IGN);
-		setenv("parent",getcwd(currentDirectory, 1024),1);
+		setenv("parent",getcwd(current_dir, 1024),1);
 		
 		/*If we launch non-existing commands we end the process*/
 		if (execvp(args[0],args)==error)
@@ -27,11 +27,7 @@ void prog_launch(char **args, int background)
 			kill(getpid(),SIGTERM);
 		}
 	 }
-	 /**
- 		* If the process is not requested to be in background, we wait for
-	  * the child to finish.
-	  */
-	 if (background == 0)
+	 if (bckgrnd == 0)
 	 {
 		 waitpid(pid,NULL,0);
 	 }
@@ -45,12 +41,12 @@ void prog_launch(char **args, int background)
 * files - Method used to manage I/O redirection
 * Retuen: always zero
 */ 
-void files(char *args[], char *inputFile, char *outputFile, int option)
+void files(char *args[], char *inputFile, char *outputFile, int opt)
 {
 	 
 	int error = -1;
 	
-	int file_desc; /*between 0 and 19, describing the output or input file*/
+	int file_desc;
 	
 	if((pid=fork())==-1)
 	{
@@ -65,7 +61,7 @@ void files(char *args[], char *inputFile, char *outputFile, int option)
 			dup2(file_desc, STDOUT_FILENO);
 			close(file_desc);
 		}
-		else if (option == 1)
+		else if (opt == 1)
 		{
 			file_desc = open(inputFile, O_RDONLY, 0600);
 			dup2(file_desc, STDIN_FILENO);
@@ -74,7 +70,7 @@ void files(char *args[], char *inputFile, char *outputFile, int option)
 			dup2(file_desc, STDOUT_FILENO);
 			close(file_desc);
 		}
-		setenv("parent",getcwd(currentDirectory, 1024),1);
+		setenv("parent",getcwd(current_dir, 1024),1);
 		
 		if (execvp(args[0],args)==error)
 		{

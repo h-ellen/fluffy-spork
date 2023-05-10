@@ -1,4 +1,4 @@
-#include "shel.h"
+#include "shell.h"
 
 /**
  * initalize - function used to initialize our shell.

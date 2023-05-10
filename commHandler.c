@@ -127,7 +127,7 @@ int commandHandler(char *args[])
 						return -2;
 					}
 				}
-				fileIO(args_aux,args[a+1],args[a+3],1);
+				files(args_aux,args[a+1],args[a+3],1);
 				return 1;
 			}
 			/**
@@ -142,7 +142,7 @@ int commandHandler(char *args[])
 					printf("Not enough input arguments\n");
 					return -1;
 				}
-				fileIO(args_aux,NULL,args[a+1],0);
+				files(args_aux,NULL,args[a+1],0);
 				return 1;
 			}
 			a++;

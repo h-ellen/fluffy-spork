@@ -6,8 +6,8 @@
  */ 
 int commandHandler(char *args[])
 {
-	int i = 0;
-	int j = 0;
+	int a = 0;
+	int b = 0;
 	
 	int fileDescriptor;
 	int standardOut;
@@ -19,14 +19,14 @@ int commandHandler(char *args[])
 	
 	/*We look for the special characters and separate the command itself*/
 	/*in a new array for the arguments*/
-	while ( args[j] != NULL)
+	while ( args[b] != NULL)
 	{
-		if ( (strcmp(args[j],">") == 0) || (strcmp(args[j],"<") == 0) || (strcmp(args[j],"&") == 0))
+		if ( (strcmp(args[b],">") == 0) || (strcmp(args[b],"<") == 0) || (strcmp(args[b],"&") == 0))
 		{
 			break;
 		}
-		args_aux[j] = args[j];
-		j++;
+		args_aux[b] = args[b];
+		b++;
 	}
 	
 	/*'exit' command quits the shell*/
@@ -36,12 +36,12 @@ int commandHandler(char *args[])
 	/*'pwd' command prints the current directory*/
  	else if (strcmp(args[0],"pwd") == 0)
 	{
-		if (args[j] != NULL)
+		if (args[b] != NULL)
 		{
 			/*If we want file output*/
-			if ( (strcmp(args[j],">") == 0) && (args[j+1] != NULL) )
+			if ( (strcmp(args[b],">") == 0) && (args[b+1] != NULL) )
 			{
-				fileDescriptor = open(args[j+1], O_CREAT | O_TRUNC | O_WRONLY, 0600); 
+				fileDescriptor = open(args[b+1], O_CREAT | O_TRUNC | O_WRONLY, 0600); 
 				/*We replace stdo with the appropriate file*/
 				standardOut = dup(STDOUT_FILENO); 
 				/*first we make a copy of stdout because we'll want it back*/
@@ -69,12 +69,12 @@ int commandHandler(char *args[])
 	/*'environ' command to list the environment variables*/
 	else if (strcmp(args[0],"environ") == 0)
 	{
-		if (args[j] != NULL)
+		if (args[b] != NULL)
 		{
 			/*If we want file output*/
-			if ( (strcmp(args[j],">") == 0) && (args[j+1] != NULL) )
+			if ( (strcmp(args[b],">") == 0) && (args[b+1] != NULL) )
 			{
-				fileDescriptor = open(args[j+1], O_CREAT | O_TRUNC | O_WRONLY, 0600); 
+				fileDescriptor = open(args[b+1], O_CREAT | O_TRUNC | O_WRONLY, 0600); 
 				/*We replace the standard output with the appropriate file*/
 				standardOut = dup(STDOUT_FILENO);
 				dup2(fileDescriptor, STDOUT_FILENO); 
@@ -98,13 +98,13 @@ int commandHandler(char *args[])
     manageEnviron(args,2);
   else
   {
-    while (args[i] != NULL && background == 0)
+    while (args[a] != NULL && background == 0)
     {
-      if (strcmp(args[i],"&") == 0)
+      if (strcmp(args[a],"&") == 0)
       {
         background = 1;
       }
-			else if (strcmp(args[i],"|") == 0)
+			else if (strcmp(args[a],"|") == 0)
 			{
 				pipeHandler(args);
 				return 1;
@@ -114,9 +114,9 @@ int commandHandler(char *args[])
 			 * First we check if the structure given is the correct one,
 			 * and if that is the case we call the appropriate method
 			 */
-			else if (strcmp(args[i],"<") == 0)
+			else if (strcmp(args[a],"<") == 0)
 			{
-				aux = i+1;
+				aux = a+1;
 				if (args[aux] == NULL || args[aux+1] == NULL || args[aux+2] == NULL )
 				{
 					printf("Not enough input arguments\n");
@@ -130,7 +130,7 @@ int commandHandler(char *args[])
 						return -2;
 					}
 				}
-				fileIO(args_aux,args[i+1],args[i+3],1);
+				fileIO(args_aux,args[a+1],args[a+3],1);
 				return 1;
 			}
 			/**
@@ -138,20 +138,20 @@ int commandHandler(char *args[])
 			 * First we check if the structure given is the correct one,
 			 * and if that is the case we call the appropriate method
 			 */
-			else if (strcmp(args[i],">") == 0)
+			else if (strcmp(args[a],">") == 0)
 			{
-				if (args[i+1] == NULL)
+				if (args[a+1] == NULL)
 				{
 					printf("Not enough input arguments\n");
 					return -1;
 				}
-				fileIO(args_aux,NULL,args[i+1],0);
+				fileIO(args_aux,NULL,args[a+1],0);
 				return 1;
 			}
-			i++;
+			a++;
 		}
 
-		args_aux[i] = NULL;
+		args_aux[a] = NULL;
 		launchProg(args_aux,background);
 	}
 	return 1;

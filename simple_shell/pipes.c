@@ -37,7 +37,7 @@ void pipe_handler(char *args[])
 		q = 0;
 		while (strcmp(args[p],"|") != 0)
 		{
-			comm[k] = args[p];
+			comm[q] = args[p];
 			p++;	
 			if (args[p] == NULL)
 			{

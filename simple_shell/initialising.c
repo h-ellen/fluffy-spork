@@ -46,7 +46,7 @@ void initalize()
  * _child_handler - signal handler for SIGCHLD
  * Return: always zero
  */
-void _child_handler(int p)
+void _child_handler()
 {
 	while (waitpid(-1, NULL, WNOHANG) > 0)
 	{
@@ -58,7 +58,7 @@ void _child_handler(int p)
  * _int_handler - Signal handler for SIGINT
  * Return: always zero
  */
-void _int_handler(int p)
+void _int_handler()
 {
 	/*We send a SIGTERM signal to the child process*/
 	if (kill(pid,SIGTERM) == 0)

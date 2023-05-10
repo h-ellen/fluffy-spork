@@ -1,4 +1,4 @@
-#include "shel.h"
+#include "shell.h"
 
 /**
 * pipe_handler - Method used to manage pipes.

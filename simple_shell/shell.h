@@ -23,7 +23,7 @@ static pid_t PGID_SH;
 static int INTERACTIVE_SH;
 static struct termios MOD_SH;
 static char* current_dir;
-extern char** e_nvironment;
+extern char** environ;
 struct sigact t_child;
 struct sigact t_int;
 int no_prompt;
@@ -34,4 +34,13 @@ void _child_handler(int p);
 void _int_handler(int p);
 
 int chgDir(char * args[]);
+int commands(char *args[]);
+void prog_launch(char **args, int bckgrnd);
+void files(char *args[], char *inputFile, char *outputFile, int opt);
+void initalize();
+void shellPrompt();
+int chgDir(char* args[]);
+int man_env(char * args[], int option);
+void pipe_handler(char *args[]);
+
 #endif /*SHEL_H*/

@@ -1,4 +1,4 @@
-#include "shel.h"
+#include "shell.h"
 
 /**
 * main - function method of our shell

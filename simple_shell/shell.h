@@ -20,7 +20,7 @@
 /*Shell pid, pgid, terminal modes*/
 static pid_t PID_SH;
 static pid_t PGID_SH;
-static --attribute-- int INTERACTIVE_SH;
+static int --attribute-- INTERACTIVE_SH;
 static struct termios MOD_SH;
 static char* current_dir;
 extern char** environ;

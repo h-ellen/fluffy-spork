@@ -76,23 +76,20 @@ int commandHandler(char *args[])
 				standardOut = dup(STDOUT_FILENO);
 				dup2(fileDescriptor, STDOUT_FILENO); 
 				close(fileDescriptor);
-				manageEnviron(args,0);
+				man_env(args,0);
 				dup2(standardOut, STDOUT_FILENO);
 			}
 		}
 		else
 		{
-			manageEnviron(args,0);
+			man_env(args,0);
 		}
 	}
-  
-	/*'setenv' command to set environment variables*/
 	else if (strcmp(args[0],"setenv") == 0)
-    manageEnviron(args,1);
-  
-	/*'unsetenv' command to undefine environment variables*/
+    man_env(args,1);
+
 	else if (strcmp(args[0],"unsetenv") == 0)
-    manageEnviron(args,2);
+    man_env(args,2);
   else
   {
     while (args[a] != NULL && background == 0)

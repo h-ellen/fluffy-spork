@@ -55,7 +55,7 @@ void files(char *args[], char *inputFile, char *outputFile, int opt)
 	}
 	if(pid==0)
 	{
-		if (option == 0)
+		if (opt == 0)
 		{
 			file_desc = open(outputFile, O_CREAT | O_TRUNC | O_WRONLY, 0600);
 			dup2(file_desc, STDOUT_FILENO);

@@ -9,7 +9,7 @@
 #include <signal.h>
 #include <sys/wait.h>
 #include <fcntl.h>
-#include <termios.>
+#include <termios.h>
 
 #define LIMIT 256
 #define MAXLINE 1024

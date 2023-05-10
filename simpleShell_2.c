@@ -1,4 +1,4 @@
-#include "util.h"
+#include "shel.h"
 
 #define LIMIT 256 /*max number of tokens for a command*/
 #define MAXLINE 1024 /*max number of characters from user input*/

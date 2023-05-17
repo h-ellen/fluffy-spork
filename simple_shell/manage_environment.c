@@ -8,7 +8,7 @@ void shellPrompt()
 {
 	char hostn[1204] = "";
 	gethostname(hostn, sizeof(hostn));
-	printf("%s@%s %s > ", getenv("LOGNAME"), hostn, getcwd(currentDirectory, 1024));
+	printf("%s@%s %s > ", getenv("LOGNAME"), hostn, getcwd(current_dir, 1024));
 }
 
 /**

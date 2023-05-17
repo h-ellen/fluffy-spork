@@ -45,5 +45,6 @@ int chgDir(char* args[]);
 int man_env(char * args[], int option);
 void pipe_handler(char *args[]);
 char *lsh_read_line(void);
+void not_interactive(void);
 
 #endif /*SHEL_H*/

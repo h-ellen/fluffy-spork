@@ -6,10 +6,9 @@
  */
 void shellPrompt()
 {
-	while (1)
-	{
-		printf("user$ ");
-	}
+	char hostn[1204] = "";
+	gethostname(hostn, sizeof(hostn));
+	printf("%s@%s %s > ", getenv("LOGNAME"), hostn, getcwd(currentDirectory, 1024));
 }
 
 /**

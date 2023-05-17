@@ -1,4 +1,4 @@
-#define LSH_RL_BUFSIZE 1024
+#include "shell.h"
 
 char *lsh_read_line(void)
 {

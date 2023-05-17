@@ -14,7 +14,7 @@ void not_interactive(void)
  do {
   line = read_stream();
   args = split_line(line); /* tokenize line */
-  status = commands(args[]);
+  status = commands(args);
   /* avoid memory leaks */
   free(line);
   free(args);

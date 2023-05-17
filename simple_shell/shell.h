@@ -32,6 +32,12 @@ struct sigaction act_int;
 int no_prompt;
 pid_t pid;
 
+/*Builtin func*/
+int own_cd(char **args);
+int own_exit(char **args);
+int own_env(char **args);
+int own_help(char **args);
+
 /*signal handlers*/
 void _child_handler();
 void _int_handler();
@@ -52,4 +58,4 @@ char **split_line(char *line);
 int execute_args(char **args);
 
 
-#endif /*SHEL_H*/
+#endif /*SHELL_H*/

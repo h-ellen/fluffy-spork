@@ -37,7 +37,7 @@ void initalize()
         }
 	else
 	{
-         not_interactive(void);
+         not_interactive();
         }
 }
 

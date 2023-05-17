@@ -37,8 +37,7 @@ void initalize()
         }
 	else
 	{
-                printf("Could not make the shell interactive.\n");
-                exit(EXIT_FAILURE);
+         not_interactive(void);
         }
 }
 

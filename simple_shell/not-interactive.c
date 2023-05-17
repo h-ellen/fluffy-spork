@@ -5,7 +5,7 @@
  *
  * Return: void
  */
-void shell_no_interactive(void)
+void not_interactive(void)
 {
  char *line;
  char **args;
@@ -25,3 +25,6 @@ void shell_no_interactive(void)
   }
  } while (status == -1);
 }
+
+/*
+ *read_stream - 

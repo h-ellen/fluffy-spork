@@ -41,6 +41,7 @@ int own_help(char **args);
 /*signal handlers*/
 void _child_handler();
 void _int_handler();
+int new_process(char **args);
 
 int chgDir(char * args[]);
 int commands(char *args[]);

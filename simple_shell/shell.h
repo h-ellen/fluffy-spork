@@ -17,6 +17,8 @@
 #define TRUE 1
 #define FALSE !TRUE
 
+#define LSH_RL_BUFSIZE 1024
+
 /*Shell pid, pgid, terminal modes*/
 static pid_t __attribute__ ((unused)) PID_SH;
 static pid_t __attribute__ ((unused)) PGID_SH;
@@ -42,5 +44,6 @@ void shellPrompt();
 int chgDir(char* args[]);
 int man_env(char * args[], int option);
 void pipe_handler(char *args[]);
+char *lsh_read_line(void);
 
 #endif /*SHEL_H*/

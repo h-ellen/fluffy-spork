@@ -18,6 +18,7 @@
 #define FALSE !TRUE
 
 #define LSH_RL_BUFSIZE 1024
+#define TOK_DELIM " \t\r\n\a\""
 
 /*Shell pid, pgid, terminal modes*/
 static pid_t __attribute__ ((unused)) PID_SH;
@@ -46,5 +47,9 @@ int man_env(char * args[], int option);
 void pipe_handler(char *args[]);
 char *lsh_read_line(void);
 void not_interactive(void);
+char *read_stream(void);
+char **split_line(char *line);
+int execute_args(char **args);
+
 
 #endif /*SHEL_H*/
